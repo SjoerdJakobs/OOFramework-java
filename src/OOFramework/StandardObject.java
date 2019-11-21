@@ -1,4 +1,4 @@
-package SFramework;
+package OOFramework;
 
 public class StandardObject extends BaseObject
 {

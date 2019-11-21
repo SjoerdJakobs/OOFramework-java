@@ -1,7 +1,7 @@
 package MainPackage;
 
-import SFramework.ExampleClasses.ExampleObject;
-import SFramework.FrameworkProgram;
+import OOFramework.ExampleClasses.ExampleObject;
+import OOFramework.FrameworkProgram;
 
 public class Program extends FrameworkProgram
 {
@@ -16,12 +16,8 @@ public class Program extends FrameworkProgram
     protected void Start() {
         super.Start();
 
-        ExampleObject testObj = new ExampleObject(this,true,true,true,true);
-
+        Remote testObj = new Remote(this,true,true,true,true);
         System.out.println("Hello World!");
-
-
-        //BoeBot.digitalWrite(10, !state);
 
 
     }

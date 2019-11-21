@@ -1,16 +1,20 @@
-package SFramework.ExampleClasses;
-import SFramework.FrameworkProgram;
-import SFramework.StandardObject;
+package MainPackage;
 
-public class ExampleObject extends StandardObject
+import MainPackage.Modules.Engine;
+import OOFramework.FrameworkProgram;
+import OOFramework.StandardObject;
+
+public class DriverAI extends StandardObject
 {
-    protected ExampleObject(FrameworkProgram frameworkProgram) {
+    private Engine engine;
+
+    protected DriverAI(FrameworkProgram frameworkProgram) {
         super(frameworkProgram);
     }
 
-    public ExampleObject(FrameworkProgram frameworkProgram, boolean usesInput, boolean usesMain, boolean usesRenderer, boolean startsActivated) {
+    public DriverAI(FrameworkProgram frameworkProgram, boolean usesInput, boolean usesMain, boolean usesRenderer, boolean startsActivated, Engine _engine) {
         super(frameworkProgram, usesInput, usesMain, usesRenderer, startsActivated);
-
+        engine = _engine;
         System.out.println("lowest");
 
     }
@@ -39,11 +43,7 @@ public class ExampleObject extends StandardObject
     @Override
     protected void MainLoop(double deltaTime) {
         super.MainLoop(deltaTime);
-    }
-
-    @Override
-    protected void RenderLoop(double deltaTime) {
-        super.RenderLoop(deltaTime);
+        engine.Drive();
     }
 
     @Override

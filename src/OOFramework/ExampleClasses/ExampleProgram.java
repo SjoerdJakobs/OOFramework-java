@@ -1,5 +1,5 @@
-package SFramework.ExampleClasses;
-import SFramework.FrameworkProgram;
+package OOFramework.ExampleClasses;
+import OOFramework.FrameworkProgram;
 
 public class ExampleProgram extends FrameworkProgram
 {
