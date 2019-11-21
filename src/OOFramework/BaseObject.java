@@ -30,7 +30,6 @@ public class BaseObject
         System.out.println("base");
         this.frameworkProgram.set(frameworkProgram);
         this.setShouldDestruct(false);
-
         this.Start();
 
         if (startsActivated) {

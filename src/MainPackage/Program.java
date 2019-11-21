@@ -1,6 +1,6 @@
 package MainPackage;
 
-import OOFramework.ExampleClasses.ExampleObject;
+import MainPackage.Modules.Engine;
 import OOFramework.FrameworkProgram;
 
 public class Program extends FrameworkProgram
@@ -15,11 +15,9 @@ public class Program extends FrameworkProgram
     @Override
     protected void Start() {
         super.Start();
-
-        Remote testObj = new Remote(this,true,true,true,true);
-        System.out.println("Hello World!");
-
-
+        Engine engine = new Engine();
+        Remote remote = new Remote(this,true,true,true,true);
+        DriverAI driverAI = new DriverAI(this,true,false,false,true,engine,remote);
     }
 
     @Override

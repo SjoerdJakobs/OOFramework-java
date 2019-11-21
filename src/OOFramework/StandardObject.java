@@ -14,12 +14,12 @@ public class StandardObject extends BaseObject
     protected StandardObject(FrameworkProgram frameworkProgram, boolean usesInput, boolean usesMain, boolean usesRenderer, boolean startsActivated)
     {
         super(frameworkProgram, startsActivated);
-
-        System.out.println("runnable");
-
         this.usesInput = usesInput;
         this.usesMain = usesMain;
         this.usesRenderer = usesRenderer;
+        this.AddToLists();
+        System.out.println("runnable");
+
     }
 
     protected void InputLoop(double deltaTime)
@@ -56,6 +56,7 @@ public class StandardObject extends BaseObject
     protected void AddToLists()
     {
         super.AddToLists();
+        System.out.println("add2");
         if (usesInput) {
             getFrameworkProgram().getInputObjects().add(this);
         }

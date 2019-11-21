@@ -11,10 +11,8 @@ public class Remote extends StandardObject
 {
     private Receiver receiver;
     private ArrayList<Button> buttons;
-    private ArrayList<Long> buttonsi;
-    Long i;
 
-    public Button UpButton;
+    private Button upButton;
 
     protected Remote(FrameworkProgram frameworkProgram) {
         super(frameworkProgram);
@@ -22,38 +20,28 @@ public class Remote extends StandardObject
 
     public Remote(FrameworkProgram frameworkProgram, boolean usesInput, boolean usesMain, boolean usesRenderer, boolean startsActivated) {
         super(frameworkProgram, usesInput, usesMain, usesRenderer, startsActivated);
-        buttons = new ArrayList<Button>();
-        UpButton = new Button(112);
-        buttons.add(UpButton);
 
         receiver = new Receiver();
-        i = 1L;
-        buttonsi = new ArrayList<Long>();
-        buttonsi.add(i);
+
+        buttons = new ArrayList<Button>();
+        upButton = new Button(111111111111L);
+        buttons.add(upButton);
+
 
         System.out.println("lowest");
 
-        System.out.println("i = " + i);
-        System.out.println("i in list = " + buttonsi.get(0));
-        System.out.println("button = " + UpButton.getAddress());
+        System.out.println("button = " + upButton.getAddress());
+        System.out.println("button = " + upButton.IsPressed());
         System.out.println("button in list = " + buttons.get(0).getAddress());
+        System.out.println("button in list = " + buttons.get(0).IsPressed());
 
-        receiver.CheckInt(i);
-        receiver.CheckInt(buttonsi);
         //receiver.CheckInt(UpButton);
-        receiver.CheckInt1(buttons);
+        receiver.CheckForButtonPresses(buttons);
 
-        System.out.println("i after method = " + i);
-        System.out.println("i in list after method = " + buttonsi.get(0));
-        System.out.println("button after method = " + UpButton.getAddress());
+        System.out.println("button after method = " + upButton.getAddress());
+        System.out.println("button after method = " + upButton.IsPressed());
         System.out.println("button in list after method = " + buttons.get(0).getAddress());
-
-        /*receiver.CheckInt(i);
-        receiver.CheckInt(buttonsi);
-
-        System.out.println("i after method 2 = " + i);
-        System.out.println("i in list after method 2 = " + buttonsi.get(0));
-        */
+        System.out.println("button in list after method = " + buttons.get(0).IsPressed());
     }
 
     @Override
@@ -72,14 +60,33 @@ public class Remote extends StandardObject
         super.Sleep();
     }
 
+    double counter = 0;
+
     @Override
     protected void InputLoop(double deltaTime) {
         super.InputLoop(deltaTime);
 
+        counter += deltaTime;
+        if(counter >= 1)
+        {
+            counter = 0;
+            upButton.onButtonPress.run();
+        }
+        receiver.CheckForButtonPresses(buttons);
     }
 
     @Override
     protected void Destroy() {
         super.Destroy();
+    }
+
+    public Button getUpButton()
+    {
+        return upButton;
+    }
+
+    public void setUpButton(Button upButton)
+    {
+        this.upButton = upButton;
     }
 }
