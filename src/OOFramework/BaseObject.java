@@ -5,7 +5,7 @@ import OOFramework.FrameworkProgram;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class BaseObject
+public abstract class BaseObject
 {
     /**
      * should this object be active

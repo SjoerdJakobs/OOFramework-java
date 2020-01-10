@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class FrameworkProgram
+public abstract class FrameworkProgram
 {
     private final AtomicBoolean run = new AtomicBoolean(false);
 
