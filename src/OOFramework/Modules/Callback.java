@@ -1,4 +1,4 @@
-package MainPackage.Modules;
+package OOFramework.Modules;
 
 public interface Callback
 {

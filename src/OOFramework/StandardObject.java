@@ -56,7 +56,6 @@ public class StandardObject extends BaseObject
     protected void AddToLists()
     {
         super.AddToLists();
-        System.out.println("add2");
         if (usesInput) {
             getFrameworkProgram().getInputObjects().add(this);
         }
