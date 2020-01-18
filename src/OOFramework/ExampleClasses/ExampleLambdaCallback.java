@@ -1,6 +1,6 @@
-package buttercat.exampleclasses;
+package OOFramework.ExampleClasses;
 
-import interfacelayer.Callback;
+import OOFramework.Modules.Callback;
 
 /**
  * the class which holds the callback and where the callback actualy can be called from
