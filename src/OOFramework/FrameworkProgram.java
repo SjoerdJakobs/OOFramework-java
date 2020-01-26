@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-import javafx.application.Application;
-import javafx.scene.canvas.Canvas;
-import javafx.stage.Stage;
 
-public abstract class FrameworkProgram extends Application
+public abstract class FrameworkProgram
 {
     private final AtomicBoolean run = new AtomicBoolean(false);
 
@@ -21,8 +18,6 @@ public abstract class FrameworkProgram extends Application
     private ArrayList<StandardObject> renderObjects = new ArrayList<StandardObject>();
 
     private double deltaTime = 0;
-
-    protected Canvas canvas;
 
     public FrameworkProgram()
     {

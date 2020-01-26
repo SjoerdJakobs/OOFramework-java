@@ -1,16 +1,9 @@
 package OOFramework.ExampleClasses;
 import OOFramework.FrameworkProgram;
-import javafx.stage.Stage;
 
 public class ExampleProgram extends FrameworkProgram
 {
     ExampleProgram()
-    {
-
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception
     {
 
     }
