@@ -10,7 +10,6 @@ import org.jfree.fx.FXGraphics2D;
 public class SetUpApplication extends Application
 {
 
-    //Program program = new Program();
     private Canvas canvas;
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -19,7 +18,6 @@ public class SetUpApplication extends Application
         primaryStage.setScene(new Scene(new Group(canvas)));
         primaryStage.setTitle("Hello Java 2D");
         primaryStage.show();
-        //program.Run();
     }
 
     public void draw(FXGraphics2D graphics) {

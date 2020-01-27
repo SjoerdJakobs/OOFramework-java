@@ -1,11 +1,13 @@
 package OOFramework;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-public abstract class FrameworkProgram
+public abstract class FrameworkProgram implements KeyListener
 {
     private final AtomicBoolean run = new AtomicBoolean(false);
 
@@ -21,7 +23,7 @@ public abstract class FrameworkProgram
 
     public FrameworkProgram()
     {
-
+        this.Run();
     }
 
     public void Run() {
@@ -89,10 +91,27 @@ public abstract class FrameworkProgram
 
     }
 
+    protected void ProgramKeyPressed(int keyCode) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        this.ProgramKeyPressed(e.getKeyCode());
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) { }
+
+    @Override
+    public void keyTyped(KeyEvent e) { }
+
     protected void ExitProgram()
     {
         run.set(false);
     }
+
+
 
     public AtomicBoolean isRun()
     {
