@@ -1,12 +1,9 @@
 package OOFramework.statemachine;
 
-import OOFramework.StandardObject;
-import OOFramework.FrameworkProgram;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class StateMachine extends StandardObject
+public class StateMachine
 {
     private Map<StateID, State> states = new HashMap<StateID, State>();
 
@@ -17,19 +14,11 @@ public class StateMachine extends StandardObject
     private long timeSinceSwitch;
 
 
-    public StateMachine(FrameworkProgram frameworkProgram) {
-        super(frameworkProgram);
+    public StateMachine() {
+
     }
 
-    public StateMachine(FrameworkProgram frameworkProgram, boolean usesInput, boolean usesMain, boolean usesRenderer, boolean startsActivated) {
-        super(frameworkProgram, usesInput, usesMain, usesRenderer, startsActivated);
-
-        System.out.println("lowest");
-    }
-
-    @Override
-    protected void MainLoop(double deltaTime) {
-        super.MainLoop(deltaTime);
+    protected void StateMachineLoop(double deltaTime) {
         this.deltaTime = deltaTime;
         if(currentState != null){
             //System.out.println("executeState" + currentState.stateID);
@@ -45,8 +34,8 @@ public class StateMachine extends StandardObject
     /**
      * set the currentState of the state machine and exit the former currentState
      * @param stateID the id of the state that will become the current state
-     */public void SetState(StateID stateID,
-     long delay)
+     */
+    public void SetState(StateID stateID, long delay)
     {
         if(System.nanoTime() - timeSinceSwitch < delay*1000_000_000L)
         {
