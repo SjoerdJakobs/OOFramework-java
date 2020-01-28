@@ -9,10 +9,16 @@ public class ExampleGoToToiletState extends State
 
     public ExampleGoToToiletState(ExampleStudent exampleStudent)
     {
+        /**
+         * make sure that"ExampleGoToToiletState" is added in the class StateID
+         */
         super(StateID.ExampleGoToToiletState);
         this.Student = exampleStudent;
     }
 
+    /**
+     * this function gets called when you enter the state and gets called before the loops
+     */
     @Override
     protected void enter()
     {
@@ -20,6 +26,10 @@ public class ExampleGoToToiletState extends State
         System.out.println("lets go to the toilet");
     }
 
+    /**
+     * this function gets called after the start and awake function but before the logic loop and leave function.
+     * this function gets called every program cycle
+     */
     @Override
     protected void checkForStateSwitch()
     {
@@ -32,6 +42,10 @@ public class ExampleGoToToiletState extends State
     }
 
     double timer = 0;
+    /**
+     * this function gets called after the start, awake and checkForStateSwitch function but before the leave function.
+     * this function gets called every program cycle
+     */
     @Override
     protected void logic()
     {
@@ -44,6 +58,9 @@ public class ExampleGoToToiletState extends State
         Student.setPeeValue(Student.getPeeValue() - stateMachine.getDeltaTime()*3);
     }
 
+    /**
+     * this function gets called when you leave this state and after all other functions
+     */
     @Override
     protected void leave()
     {

@@ -7,26 +7,45 @@ import OOFramework.statemachine.StateMachine;
 
 public class ExampleStudent extends StandardObject
 {
+    /**
+     * this var will hold the statemachine for the student ai, this is yet to be instantiated
+     */
     private StateMachine StudentStateMachine;
+    /**
+     *how much does this student need to pee
+     */
     private double peeValue = 0;
 
-    public ExampleStudent(FrameworkProgram frameworkProgram)
-    {
-        super(frameworkProgram);
-    }
-
+    /**
+     * decide which loops are used and give the main framework to this object
+     */
     public ExampleStudent(FrameworkProgram frameworkProgram, boolean usesInput, boolean usesMain, boolean usesRenderer, boolean startsActivated)
     {
         super(frameworkProgram, usesInput, usesMain, usesRenderer, startsActivated);
     }
 
+    /**
+     * this is the first thing that gets called after its constructor
+     */
     @Override
     protected void Start()
     {
         super.Start();
+        /**
+         * make a new statemachine, essentially the base of the ai for this student
+         */
         StudentStateMachine = new StateMachine();
+
+        /**
+         * create the states that the student will use and then add them to the statemachine of the student.
+         * dont forget to make a enum in the class StateID
+         */
         StudentStateMachine.AddState(new ExampleGoToLessonState(this));
         StudentStateMachine.AddState(new ExampleGoToToiletState(this));
+
+        /**
+         * start and set the state in which the student starts
+         */
         StudentStateMachine.SetState(StateID.ExampleGoToLessonState);
     }
 
@@ -40,9 +59,13 @@ public class ExampleStudent extends StandardObject
     protected void MainLoop(double deltaTime)
     {
         super.MainLoop(deltaTime);
+        /**
+         * run the statemachine loop
+         */
         StudentStateMachine.StateMachineLoop(deltaTime);
     }
 
+    //getters and setters below here
     public double getPeeValue()
     {
         return peeValue;
