@@ -7,7 +7,6 @@ public class ASSERT_MSG
         if (CONSTANTS.DEBUG_MODE) {
             if (condition) {
                 System.out.println(msg);
-                System.exit(0);
             }
         }
     }
