@@ -49,6 +49,7 @@ public class ExampleGoToLessonState extends State
     protected void logic()
     {
         super.logic();
+        //deltatime is time inbetween frames
         timer += stateMachine.getDeltaTime();
         if(timer >= 1) {
             System.out.println("iam in or going to the lesson");

@@ -7,6 +7,7 @@ import static javafx.application.Application.launch;
 
 public class Program extends FrameworkProgram
 {
+    //student variable
     ExampleStudent Student;
     Program()
     {
@@ -16,6 +17,7 @@ public class Program extends FrameworkProgram
     @Override
     protected void Start() {
         super.Start();
+        // create new student
         Student = new ExampleStudent(this,false,true,true,true);
     }
 

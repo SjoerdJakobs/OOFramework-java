@@ -58,6 +58,7 @@ public class ExampleStudent extends StandardObject
     @Override
     protected void MainLoop(double deltaTime)
     {
+        //deltatime is time inbetween frames and already gets given
         super.MainLoop(deltaTime);
         /**
          * run the statemachine loop
