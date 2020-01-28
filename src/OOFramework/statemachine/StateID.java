@@ -3,5 +3,7 @@ package OOFramework.statemachine;
 public enum StateID
 {
     NullStateID,
-    ExampleState;
+    ExampleState,
+    ExampleGoToToiletState,
+    ExampleGoToLessonState;
 }

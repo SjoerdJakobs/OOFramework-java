@@ -18,7 +18,7 @@ public class StateMachine
 
     }
 
-    protected void StateMachineLoop(double deltaTime) {
+    public void StateMachineLoop(double deltaTime) {
         this.deltaTime = deltaTime;
         if(currentState != null){
             //System.out.println("executeState" + currentState.stateID);

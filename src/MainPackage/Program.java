@@ -1,11 +1,13 @@
 package MainPackage;
 
+import OOFramework.ExampleClasses.ExampleStudent;
 import OOFramework.FrameworkProgram;
 
 import static javafx.application.Application.launch;
 
 public class Program extends FrameworkProgram
 {
+    ExampleStudent Student;
     Program()
     {
         super();
@@ -14,7 +16,7 @@ public class Program extends FrameworkProgram
     @Override
     protected void Start() {
         super.Start();
-        launch(SetUpApplication.class);
+        Student = new ExampleStudent(this,false,true,true,true);
     }
 
     @Override

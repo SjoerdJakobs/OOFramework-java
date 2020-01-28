@@ -5,9 +5,6 @@ import OOFramework.statemachine.StateID;
 
 public class ExampleState extends State
 {
-
-    private boolean shouldGoToRemoteControl;
-
     public ExampleState()
     {
         super(StateID.ExampleState);

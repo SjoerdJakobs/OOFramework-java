@@ -29,7 +29,7 @@ public abstract class BaseObject
 
     protected BaseObject(FrameworkProgram frameworkProgram, boolean startsActivated)
     {
-        System.out.println("base");
+        //System.out.println("base");
         this.frameworkProgram.set(frameworkProgram);
         this.setShouldDestruct(false);
         this.Start();

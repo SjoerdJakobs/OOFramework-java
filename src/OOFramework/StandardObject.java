@@ -18,7 +18,7 @@ public abstract class StandardObject extends BaseObject
         this.usesMain = usesMain;
         this.usesRenderer = usesRenderer;
         this.AddToLists();
-        System.out.println("runnable");
+        //System.out.println("Standard");
 
     }
 
