@@ -17,11 +17,25 @@ public class ExampleStudent extends StandardObject
     private double peeValue = 0;
 
     /**
+     *when does this student need to go to thw toilet
+     */
+    private double peeThreshold = 5;
+
+    /**
      * decide which loops are used and give the main framework to this object
      */
     public ExampleStudent(FrameworkProgram frameworkProgram, boolean usesInput, boolean usesMain, boolean usesRenderer, boolean startsActivated)
     {
         super(frameworkProgram, usesInput, usesMain, usesRenderer, startsActivated);
+    }
+
+    /**
+     * decide which loops are used and give the main framework to this object
+     */
+    public ExampleStudent(FrameworkProgram frameworkProgram, double peeThreshold)
+    {
+        super(frameworkProgram, false, true, true, true);
+        this.peeThreshold = peeThreshold;
     }
 
     /**
@@ -85,5 +99,13 @@ public class ExampleStudent extends StandardObject
     public void setStudentStateMachine(StateMachine studentStateMachine)
     {
         StudentStateMachine = studentStateMachine;
+    }
+
+    public double getPeeThreshold() {
+        return peeThreshold;
+    }
+
+    public void setPeeThreshold(double peeThreshold) {
+        this.peeThreshold = peeThreshold;
     }
 }

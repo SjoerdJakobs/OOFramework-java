@@ -34,7 +34,7 @@ public class ExampleGoToLessonState extends State
     protected void checkForStateSwitch()
     {
         super.checkForStateSwitch();
-        if(Student.getPeeValue() >= 10)
+        if(Student.getPeeValue() >= Student.getPeeThreshold())
         {
             stateMachine.SetState(StateID.ExampleGoToToiletState);
         }

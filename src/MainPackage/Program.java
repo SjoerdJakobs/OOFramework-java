@@ -9,6 +9,7 @@ public class Program extends FrameworkProgram
 {
     //student variable
     ExampleStudent Student;
+    ExampleStudent Student2;
     Program()
     {
         super();
@@ -18,7 +19,9 @@ public class Program extends FrameworkProgram
     protected void Start() {
         super.Start();
         // create new student
-        Student = new ExampleStudent(this,false,true,true,true);
+        Student = new ExampleStudent(this, 6 );
+        Student2 = new ExampleStudent(this, 9 );
+        //Student = new ExampleStudent(this, 12);
     }
 
     @Override
