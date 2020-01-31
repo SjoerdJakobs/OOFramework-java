@@ -2,6 +2,10 @@ package MainPackage;
 
 import OOFramework.ExampleClasses.ExampleStudent;
 import OOFramework.FrameworkProgram;
+import javafx.stage.Stage;
+import org.jfree.fx.FXGraphics2D;
+
+import java.awt.*;
 
 import static javafx.application.Application.launch;
 
@@ -10,9 +14,17 @@ public class Program extends FrameworkProgram
     //student variable
     ExampleStudent Student;
     ExampleStudent Student2;
-    Program()
-    {
-        super();
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        super.start(stage);
+
+    }
+
+    @Override
+    public void draw(FXGraphics2D g2d) {
+        super.draw(g2d);
+
     }
 
     @Override
@@ -33,6 +45,5 @@ public class Program extends FrameworkProgram
     @Override
     protected void ExitProgram() {
         super.ExitProgram();
-
     }
 }

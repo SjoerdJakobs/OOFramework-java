@@ -13,6 +13,11 @@ public class ExampleLambdaCallback
      * there can only be one method in the call back, if you put in a new one it will replace the old one
      */
     public Callback callback;
+
+    private void test()
+    {
+        callback.run();
+    }
 }
 
 
