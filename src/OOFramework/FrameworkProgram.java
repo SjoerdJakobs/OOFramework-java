@@ -14,6 +14,8 @@ import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static OOFramework.Modules.CONSTANTS.*;
+
 public abstract class FrameworkProgram extends Application
 {
     private final AtomicBoolean running = new AtomicBoolean(false);
@@ -30,19 +32,18 @@ public abstract class FrameworkProgram extends Application
     private double deltaTime = 0;
 
     protected Stage stage;
-    protected double angle = 0.0;
     protected Canvas canvas;
+    protected FXGraphics2D graphics2D;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        canvas = new Canvas(1920, 1080);
-        FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
-        primaryStage.setScene(new Scene(new Group(canvas)));
-        primaryStage.setTitle("Hello Animation");
-        primaryStage.show();
-
-        Start();
+        this.canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+        this.graphics2D = new FXGraphics2D(canvas.getGraphicsContext2D());
+        this.stage.setScene(new Scene(new Group(canvas)));
+        this.stage.setTitle(TITLE);
+        this.stage.show();
+        Init();
 
         new AnimationTimer() {
             long last = -1;
@@ -50,20 +51,14 @@ public abstract class FrameworkProgram extends Application
             public void handle(long now) {
                 if (last == -1)
                     last = now;
-                Run(g2d);
+                Run(graphics2D);
                 last = now;
             }
         }.start();
     }
 
     public void draw(FXGraphics2D g2d) {
-        g2d.setBackground(Color.white);
-        g2d.clearRect(0,0,1920,1080);
-        //AffineTransform tx = new AffineTransform();
-        //tx.translate(1920/2, 1080/2);
-        //tx.rotate(angle);
-        //tx.translate(200, 0);
-        //g2d.fill(tx.createTransformedShape(new Rectangle2D.Double(-50,-50,100,100)));
+
     }
 
     long lastTime = System.nanoTime();
@@ -89,11 +84,15 @@ public abstract class FrameworkProgram extends Application
         for (StandardObject object : mainObjects) {
             object.MainLoop(deltaTime);
         }
+
+        //clear screen
+        g2d.setBackground(Color.white);
+        g2d.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        //
+
         for (StandardObject object : renderObjects) {
             object.RenderLoop(deltaTime);
         }
-
-        draw(g2d);
 
         Iterator<BaseObject> it = objects.get().iterator();
         while (it.hasNext()) {
@@ -113,7 +112,7 @@ public abstract class FrameworkProgram extends Application
         }
     }
 
-    protected void Start()
+    protected void Init()
     {
         running.set(true);
     }
@@ -137,6 +136,14 @@ public abstract class FrameworkProgram extends Application
     public AtomicBoolean isPaused()
     {
         return paused;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public FXGraphics2D getGraphics2D() {
+        return graphics2D;
     }
 
     public AtomicReference<ArrayList<BaseObject>> getObjects()
