@@ -1,10 +1,6 @@
-package OOFramework.Pathfinding;
+package OOFramework.Pathfinding.Astar;
 
 import OOFramework.Maths.Vector2;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class AStar
 {

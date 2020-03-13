@@ -1,4 +1,4 @@
-package OOFramework.Pathfinding;
+package OOFramework.Pathfinding.Astar;
 
 import OOFramework.Maths.Vector2;
 

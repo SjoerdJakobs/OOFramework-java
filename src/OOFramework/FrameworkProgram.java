@@ -1,5 +1,6 @@
 package OOFramework;
 
+import com.sun.org.apache.xpath.internal.objects.XNull;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -9,8 +10,8 @@ import javafx.stage.Stage;
 import org.jfree.fx.FXGraphics2D;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.awt.image.BufferStrategy;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -26,10 +27,18 @@ public abstract class FrameworkProgram extends Application
     private final AtomicReference<ArrayList<RunnableObject>> runnableObjects = new AtomicReference<>(new ArrayList<RunnableObject>());
 
     private ArrayList<StandardObject> inputObjects  = new ArrayList<StandardObject>();
-    private ArrayList<StandardObject> mainObjects   = new ArrayList<StandardObject>();
-    private ArrayList<StandardObject> renderObjects = new ArrayList<StandardObject>();
+    private ArrayList<PriorityGroup> mainGroups = new ArrayList<PriorityGroup>();
+    private ArrayList<PriorityGroup> renderGroups = new ArrayList<PriorityGroup>();
 
+    private BufferStrategy bufferStrategy = null;
+
+    //deltatime influenced by timeScale
     private double deltaTime = 0;
+    //the current scale for delata time, 2 would speed everything up and 0.5 would slow everything down
+    protected double timeScale = 1;
+
+    //deltatime that will always give the time between frames
+    private double unscaledDeltaTime = 0;
 
     protected Stage stage;
     protected Canvas canvas;
@@ -57,19 +66,20 @@ public abstract class FrameworkProgram extends Application
         }.start();
     }
 
-    public void draw(FXGraphics2D g2d) {
 
-    }
+
 
     long lastTime = System.nanoTime();
 
-    public void Run(FXGraphics2D g2d) {
+    public void Run(FXGraphics2D g2d)
+    {
 
         /**
          * calculate deltatime
          */
         long time = System.nanoTime();
-        deltaTime = ((double) (time - lastTime) / 1000_000_000);//delta time in seconds
+        unscaledDeltaTime = (((double) (time - lastTime) / 1000_000_000));//the true delta time in seconds
+        deltaTime = unscaledDeltaTime * timeScale;//scaled delta time in seconds
         lastTime = time;
 
         //uncomment to print the deltatime in seconds
@@ -78,20 +88,29 @@ public abstract class FrameworkProgram extends Application
 
         AddToLoop();
 
+        //input uses the unscaledDeltaTime since this loop should not be used for program logic
         for (StandardObject object : inputObjects) {
-            object.InputLoop(deltaTime);
+            object.InputLoop(unscaledDeltaTime);
         }
-        for (StandardObject object : mainObjects) {
-            object.MainLoop(deltaTime);
+
+        for (PriorityGroup group : mainGroups)
+        {
+            for (StandardObject object : group.standardObjects)
+            {
+                object.MainLoop(deltaTime);
+            }
         }
 
         //clear screen
         g2d.setBackground(Color.white);
         g2d.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-        //
 
-        for (StandardObject object : renderObjects) {
-            object.RenderLoop(deltaTime);
+        for (PriorityGroup group : renderGroups)
+        {
+            for (StandardObject object : group.standardObjects)
+            {
+                object.RenderLoop(deltaTime);
+            }
         }
 
         Iterator<BaseObject> it = objects.get().iterator();
@@ -109,6 +128,12 @@ public abstract class FrameworkProgram extends Application
                 bo.setActivated(false);
                 bo.Sleep();
             }
+        }
+
+        try {
+            Thread.sleep(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -161,14 +186,14 @@ public abstract class FrameworkProgram extends Application
         return inputObjects;
     }
 
-    public ArrayList<StandardObject> getMainObjects()
+    public ArrayList<PriorityGroup> getMainGroups()
     {
-        return mainObjects;
+        return mainGroups;
     }
 
-    public ArrayList<StandardObject> getRenderObjects()
+    public ArrayList<PriorityGroup> getRenderGroups()
     {
-        return renderObjects;
+        return renderGroups;
     }
 }
 

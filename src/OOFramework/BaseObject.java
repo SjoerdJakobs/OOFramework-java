@@ -95,7 +95,7 @@ public abstract class BaseObject
 
     public boolean isActive()
     {
-        return active.get();
+        return this.active.get();
     }
 
     public void setActive(boolean m_active)
@@ -105,7 +105,7 @@ public abstract class BaseObject
 
     public boolean isActivated()
     {
-        return activated.get();
+        return this.activated.get();
     }
 
     public void setActivated(boolean activated)
@@ -115,7 +115,7 @@ public abstract class BaseObject
 
     public boolean ShouldDestruct()
     {
-        return shouldDestruct.get();
+        return this.shouldDestruct.get();
     }
 
     public void setShouldDestruct(boolean shouldDestruct)
@@ -125,7 +125,7 @@ public abstract class BaseObject
 
     public FrameworkProgram getFrameworkProgram()
     {
-        return frameworkProgram.get();
+        return this.frameworkProgram.get();
     }
 
     public void setFrameworkProgram(FrameworkProgram frameworkProgram)
