@@ -25,6 +25,7 @@ public class Program extends FrameworkProgram
     @Override
     protected void Init() {
         super.Init();
+        timeScale = 0.1;
         Rectangle2 r = new Rectangle2(this,graphics2D,CANVAS_WIDTH/2,CANVAS_HEIGHT/2);
         for(int i = 0; i<200;i++)
         {

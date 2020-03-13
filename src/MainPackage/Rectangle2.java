@@ -18,7 +18,7 @@ public class Rectangle2 extends StandardObject
     private Canvas canvas;
 
     protected Rectangle2(FrameworkProgram frameworkProgram, Graphics2D graphics2D, int startPosX,int startPosY) {
-        super(frameworkProgram, true, true, true, true,1001, 1000);
+        super(frameworkProgram, true, true, true, true,999, 1000);
         this.graphics2D = graphics2D;
         this.square2D = new Renderable(new Rectangle2D.Double(-150,-150,300,300), new Point2D.Double(startPosX,startPosY), 0, 1);
         this.canvas = frameworkProgram.getCanvas();

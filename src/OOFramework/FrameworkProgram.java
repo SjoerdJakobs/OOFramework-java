@@ -32,7 +32,7 @@ public abstract class FrameworkProgram extends Application
 
     private BufferStrategy bufferStrategy = null;
 
-    //deltatime influenced by timeScale
+    //deltatime influenced by timeScale and if the program is paused or not
     private double deltaTime = 0;
     //the current scale for delata time, 2 would speed everything up and 0.5 would slow everything down
     protected double timeScale = 1;
@@ -79,7 +79,11 @@ public abstract class FrameworkProgram extends Application
          */
         long time = System.nanoTime();
         unscaledDeltaTime = (((double) (time - lastTime) / 1000_000_000));//the true delta time in seconds
-        deltaTime = unscaledDeltaTime * timeScale;//scaled delta time in seconds
+        if(this.paused.get()) {
+            deltaTime = 0;
+        }else {
+            deltaTime = unscaledDeltaTime * timeScale;//scaled delta time in seconds
+        }
         lastTime = time;
 
         //uncomment to print the deltatime in seconds
