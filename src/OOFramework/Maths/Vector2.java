@@ -1,6 +1,6 @@
 package OOFramework.Maths;
 
-public class Vector2
+public final class Vector2
 {
     public double x;
     public double y;
@@ -20,8 +20,8 @@ public class Vector2
     }
 
     public static double Distance(Vector2 vec1, Vector2 vec2) {
-        double xDist = vec2.x - vec1.x;
-        double yDist = vec2.y - vec1.y;
+        final double xDist = vec2.x - vec1.x;
+        final double yDist = vec2.y - vec1.y;
         return Math.sqrt(xDist*xDist + yDist*yDist);
     }
 }

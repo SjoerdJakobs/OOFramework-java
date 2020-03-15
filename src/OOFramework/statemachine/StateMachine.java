@@ -3,7 +3,7 @@ package OOFramework.statemachine;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StateMachine
+public final class StateMachine
 {
     private Map<StateID, State> states = new HashMap<StateID, State>();
 

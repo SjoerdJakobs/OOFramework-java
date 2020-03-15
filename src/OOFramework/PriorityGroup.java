@@ -2,7 +2,7 @@ package OOFramework;
 
 import java.util.ArrayList;
 
-public class PriorityGroup
+public final class PriorityGroup
 {
     public boolean shouldUse;
     public int priorityNr;

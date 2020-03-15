@@ -1,6 +1,6 @@
 package OOFramework.Modules;
 
-public class CONSTANTS
+public final class CONSTANTS
 {
     public static final String TITLE = "OOFramework-Graphics2D";        // title of the game
     public static final int CANVAS_WIDTH = 1920;    // width and height of the drawing canvas
