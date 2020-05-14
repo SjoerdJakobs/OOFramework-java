@@ -13,6 +13,9 @@ public class Main
     {
         Program program = new Program();
         launch(Program.class);
+
+        //ExampleBFS exampleBFS = new ExampleBFS();
+        //exampleBFS.ShowBFS();
     }
 }
 

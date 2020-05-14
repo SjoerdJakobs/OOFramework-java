@@ -1,4 +1,4 @@
-package MainPackage;
+package OOFramework.FXGraphics2dClasses;
 
 import org.jfree.fx.FXGraphics2D;
 
@@ -21,11 +21,6 @@ public class Renderable
         this.scale = scale;
     }
 
-    public void draw(FXGraphics2D g2d)
-    {
-        g2d.draw(getTransformedShape());
-    }
-
     public Shape getTransformedShape()
     {
         return getTransform().createTransformedShape(shape);
@@ -37,6 +32,16 @@ public class Renderable
         tx.translate(position.getX(), position.getY());
         tx.rotate(rotation);
         tx.scale(scale,scale);
+        return tx;
+    }
+
+    public AffineTransform getTransform(int xOfset, int yOfset)
+    {
+        AffineTransform tx = new AffineTransform();
+        tx.translate(position.getX(), position.getY());
+        tx.rotate(rotation);
+        tx.scale(scale,scale);
+        tx.translate(-xOfset, -yOfset);
         return tx;
     }
 
