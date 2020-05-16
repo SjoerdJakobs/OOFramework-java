@@ -1,7 +1,5 @@
 package OOFramework;
 
-import java.util.Comparator;
-
 public abstract class StandardObject extends BaseObject
 {
     private boolean usesInput;
@@ -65,75 +63,41 @@ public abstract class StandardObject extends BaseObject
     protected void RemoveFromLists()
     {
         super.RemoveFromLists();
-
         if (usesInput) {
-            getFrameworkProgram().getInputObjects().remove(this);
+            getFrameworkProgram().getInputObjectsToBeRemoved().add(this);
+            getFrameworkProgram().setShouldRemoveFromInputList(true);
         }
 
-        if (usesMain) {
-            for(PriorityGroup group : getFrameworkProgram().getMainGroups())
-            {
-                if(group.priorityNr == objectPriority)
-                {
-                    group.standardObjects.remove(this);
-                }
-            }
+        if (usesMain)
+        {
+            getFrameworkProgram().getMainObjectsToBeRemoved().add(this);
+            getFrameworkProgram().setShouldRemoveFromMainGroup(true);
         }
 
         if (usesRenderer) {
-            for(PriorityGroup group : getFrameworkProgram().getRenderGroups())
-            {
-                if(group.priorityNr == renderPriority)
-                {
-                    group.standardObjects.remove(this);
-                }
-            }
+            getFrameworkProgram().getRenderObjectsToBeRemoved().add(this);
+            getFrameworkProgram().setShouldRemoveFromRenderGroup(true);
         }
     }
 
     @Override
     protected void AddToLists()
     {
+        super.AddToLists();
         if (usesInput) {
-            getFrameworkProgram().getInputObjects().add(this);
+            getFrameworkProgram().getInputObjectsToBeAdded().add(this);
+            getFrameworkProgram().setShouldAddToInputList(true);
         }
 
-        if (usesMain) {
-            boolean hasGroup = false;
-            for(PriorityGroup group : getFrameworkProgram().getMainGroups())
-            {
-                if(group.priorityNr == objectPriority)
-                {
-                    group.standardObjects.add(this);
-                    hasGroup = true;
-                }
-            }
-            if(!hasGroup)
-            {
-                final PriorityGroup addGroup =  new PriorityGroup(objectPriority);
-                addGroup.standardObjects.add(this);
-                getFrameworkProgram().getMainGroups().add(addGroup);
-                getFrameworkProgram().getMainGroups().sort(Comparator.comparing(PriorityGroup::getPriorityNr));
-            }
+        if (usesMain)
+        {
+            getFrameworkProgram().getMainObjectsToBeAdded().add(this);
+            getFrameworkProgram().setShouldAddToMainGroup(true);
         }
 
         if (usesRenderer) {
-            boolean hasGroup = false;
-            for(PriorityGroup group : getFrameworkProgram().getRenderGroups())
-            {
-                if(group.priorityNr == renderPriority)
-                {
-                    group.standardObjects.add(this);
-                    hasGroup = true;
-                }
-            }
-            if(!hasGroup)
-            {
-                final PriorityGroup addGroup =  new PriorityGroup(renderPriority);
-                addGroup.standardObjects.add(this);
-                getFrameworkProgram().getRenderGroups().add(addGroup);
-                getFrameworkProgram().getRenderGroups().sort(Comparator.comparing(PriorityGroup::getPriorityNr));
-            }
+            getFrameworkProgram().getRenderObjectsToBeAdded().add(this);
+            getFrameworkProgram().setShouldAddToRenderGroup(true);
         }
     }
 

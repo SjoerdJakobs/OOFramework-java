@@ -1,36 +1,51 @@
 package MainPackage;
 
-import OOFramework.ExampleClasses.ExampleStudent;
+import OOFramework.Debug.BoxCollisionTestObject;
+import OOFramework.Debug.CircleCollisionTestObject;
+import OOFramework.Debug.DebugDrawer;
+import OOFramework.Collision2D.CollisionSystem;
 import OOFramework.FrameworkProgram;
+import OOFramework.Maths.Vector2;
 import javafx.stage.Stage;
-import org.jfree.fx.FXGraphics2D;
 
-import java.awt.*;
-import java.util.ArrayList;
-
-import static OOFramework.Modules.CONSTANTS.CANVAS_HEIGHT;
-import static OOFramework.Modules.CONSTANTS.CANVAS_WIDTH;
 import static javafx.application.Application.launch;
 
 public class Program extends FrameworkProgram
 {
+    private static Program  programInstance;
+    public  static Program  getProgramInstance()
+    {
+        return programInstance;
+    }
+
+    private DebugDrawer     debugDrawer;
+    private CollisionSystem collisionSystem;
 
     @Override
     public void start(Stage stage) throws Exception {
         super.start(stage);
+        programInstance = this;
+
+        //used by other classes for drawing their debugging;
+        debugDrawer = new DebugDrawer(this);
+
+        //this manages all the collisions
+        collisionSystem = new CollisionSystem(this);
+
+
+        //EnemyUnit unit = new EnemyUnit(this,new Vector2(32, 492),10,26,100,5,0.25,"route0");
+
+        // test classes
+        CircleCollisionTestObject circleCollisionTestObject1 = new CircleCollisionTestObject(this,new Vector2(600,500), 100, true);
+        BoxCollisionTestObject boxCollisionTestObject1 = new BoxCollisionTestObject(this,new Vector2(600,500), 100,100, false);
+        //BoxCollisionTestObject boxCollisionTestObject2 = new BoxCollisionTestObject(this,new Vector2(600,500), 100,100, true);
 
     }
 
-    private ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
     @Override
     protected void Init() {
         super.Init();
-        timeScale = 0.1;
-        Rectangle2 r = new Rectangle2(this,graphics2D,CANVAS_WIDTH/2,CANVAS_HEIGHT/2);
-        for(int i = 0; i<200;i++)
-        {
-            rects.add(new Rectangle(this,graphics2D,((int)(Math.random()*2100))-100,(int)(Math.random()*1080)));
-        }
+
     }
 
     @Override
@@ -40,7 +55,22 @@ public class Program extends FrameworkProgram
     }
 
     @Override
-    protected void ExitProgram() {
+    public void ExitProgram() {
         super.ExitProgram();
+    }
+
+    public DebugDrawer getDebugDrawer()
+    {
+        return debugDrawer;
+    }
+
+    public CollisionSystem getCollisionSystem()
+    {
+        return collisionSystem;
+    }
+
+    public void setCollisionSystem(CollisionSystem collisionSystem)
+    {
+        this.collisionSystem = collisionSystem;
     }
 }
